@@ -38,10 +38,10 @@ Welcome to my personal portfolio website! This is a unique Windows 95-inspired i
 - Photography from various destinations
 
 #### 📄 **Code Projects**
-- Open-source contributions
-- Personal coding projects
-- Technical documentation
-- Development tutorials
+- Private repository developments and innovations
+- Personal coding projects (developed in private repositories)
+- Technical documentation and project showcases
+- Development tutorials and best practices
 
 ### 🎨 Design Features
 
