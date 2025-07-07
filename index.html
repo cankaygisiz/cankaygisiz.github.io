@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can Kaygısız - IT Specialist & Content Creator</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Can Kaygısız - IT Specialist, Cybersecurity Expert, and Content Creator from Northern Cyprus. Specializing in IoT Security, Penetration Testing, and Web Development.">
+    <meta name="keywords" content="Can Kaygısız, IT Specialist, Cybersecurity, IoT Security, Penetration Testing, Kali Linux, Web Developer, Northern Cyprus, Eastern Mediterranean University">
+    <meta name="author" content="Can Kaygısız">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Can Kaygısız - IT Specialist & Cybersecurity Expert">
+    <meta property="og:description" content="Explore the portfolio of Can Kaygısız, featuring cybersecurity projects, technical skills, and innovative solutions in IT.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cankaygisiz.github.io">
+    <meta property="og:image" content="https://cankaygisiz.github.io/images/portfolio-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@CanKaygisiz9">
+    <meta name="twitter:title" content="Can Kaygısız - IT Specialist & Cybersecurity Expert">
+    <meta name="twitter:description" content="IT Specialist and Cybersecurity Expert specializing in IoT Security and Penetration Testing.">
+    <meta name="twitter:image" content="https://cankaygisiz.github.io/images/portfolio-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MS+Sans+Serif:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Desktop Wallpaper Screen -->
+    <div class="desktop-wallpaper" id="desktop-wallpaper">
+        <div class="wallpaper-background">
+            <!-- Desktop Icons -->
+            <div class="desktop-icons">
+                <div class="desktop-icon portfolio-folder" id="portfolio-folder">
+                    <div class="icon-image">
+                        <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Simple retro folder icon -->
+                            <defs>
+                                <linearGradient id="folderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffdd44"/>
+                                    <stop offset="50%" style="stop-color:#ffcc22"/>
+                                    <stop offset="100%" style="stop-color:#ee9900"/>
+                                </linearGradient>
+                                <linearGradient id="folderTab" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#fff166"/>
+                                    <stop offset="100%" style="stop-color:#ffdd44"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Folder tab -->
+                            <path d="M8 16 L28 16 L32 20 L56 20 L56 48 L8 48 Z" fill="url(#folderTab)" stroke="#cc7700" stroke-width="1"/>
+                            <!-- Main folder body -->
+                            <path d="M8 20 L56 20 L56 48 L8 48 Z" fill="url(#folderGrad)" stroke="#cc7700" stroke-width="1"/>
+                            <!-- Folder shadow/depth -->
+                            <path d="M10 22 L54 22 L54 46 L10 46 Z" fill="none" stroke="#ee9900" stroke-width="0.5" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <div class="icon-label">Can's Portfolio</div>
+                </div>
+            </div>
+            
+            <!-- Desktop Taskbar -->
+            <div class="desktop-taskbar">
+                <div class="desktop-start-button">
+                    <span class="start-icon">🪟</span>
+                    <span class="start-text">Start</span>
+                </div>
+                <div class="desktop-time" id="desktop-time"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="desktop" id="main-desktop" style="display: none;">
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <div class="start-button">
+                <span class="start-icon">🪟</span>
+                <span class="start-text">Start</span>
+            </div>
+            <div class="taskbar-items">
+                <div class="taskbar-item active">
+                    <span class="window-icon">📁</span>
+                    <span>Can Kaygısız - Portfolio</span>
+                </div>
+            </div>
+            <div class="system-tray">
+                <span class="time" id="current-time"></span>
+            </div>
+        </div>
+
+        <!-- Main Window -->
+        <div class="window">
+            <div class="window-header">
+                <div class="window-title">
+                    <span class="window-icon">📁</span>
+                    <span>Can Kaygısız - Portfolio</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-control minimize">_</button>
+                    <button class="window-control maximize">□</button>
+                    <button class="window-control close">×</button>
+                </div>
+            </div>
+
+            <div class="window-toolbar">
+                <div class="toolbar-section">
+                    <button class="toolbar-btn">📁 File</button>
+                    <button class="toolbar-btn">✏️ Edit</button>
+                    <button class="toolbar-btn">👁️ View</button>
+                    <button class="toolbar-btn" id="theme-toggle">🌙 Dark Mode</button>
+                    <button class="toolbar-btn">❓ Help</button>
+                </div>
+                <div class="address-bar">
+                    <span class="address-label">Address:</span>
+                    <input type="text" class="address-input" value="C:\Users\Can\Portfolio" readonly>
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Search posts..." id="search-input">
+                        <button class="search-btn" id="search-btn">🔍</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="window-content">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="sidebar-header">Folders</div>
+                    <div class="folder-tree">
+                        <div class="folder-item root-folder" data-category="all">
+                            <span class="folder-icon">📁</span>
+                            <span class="folder-name">Can's Portfolio</span>
+                        </div>
+                        <div class="folder-children">
+                            <div class="folder-item" data-category="tech">
+                                <span class="folder-icon">💻</span>
+                                <span class="folder-name">Technology</span>
+                            </div>
+                            <div class="folder-item" data-category="security">
+                                <span class="folder-icon">🔒</span>
+                                <span class="folder-name">Cybersecurity</span>
+                            </div>
+                            <div class="folder-item" data-category="life">
+                                <span class="folder-icon">🌱</span>
+                                <span class="folder-name">Life</span>
+                            </div>
+                            <div class="folder-item" data-category="travel">
+                                <span class="folder-icon">✈️</span>
+                                <span class="folder-name">Travel</span>
+                            </div>
+                            <div class="folder-item" data-category="code">
+                                <span class="folder-icon">📄</span>
+                                <span class="folder-name">Code</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="main-content">
+                    <div class="content-header">
+                        <h1 class="page-title">Welcome to Can Kaygısız's Portfolio</h1>
+                        <p class="page-subtitle">IT Specialist • Cybersecurity Expert • Content Creator</p>
+                    </div>
+
+                    <!-- File List View -->
+                    <div class="file-list">
+                        <div class="file-list-header">
+                            <div class="column-header name">Name</div>
+                            <div class="column-header date">Date Modified</div>
+                            <div class="column-header type">Type</div>
+                            <div class="column-header size">Size</div>
+                        </div>
+                        <div class="file-list-content" id="file-list">
+                            <!-- Blog posts will be dynamically inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Blog Post Content -->
+                    <div class="blog-post-content" id="blog-content" style="display: none;">
+                        <div class="post-header">
+                            <button class="back-button" id="back-btn">⬅️ Back to Files</button>
+                            <h2 class="post-title" id="post-title"></h2>
+                            <div class="post-meta">
+                                <span class="post-date" id="post-date"></span>
+                                <span class="post-category" id="post-category"></span>
+                            </div>
+                            <div class="post-actions">
+                                <button class="share-btn" onclick="shareCurrentPost()">📤 Share</button>
+                                <button class="share-btn" onclick="printPost()">🖨️ Print</button>
+                                <button class="share-btn" onclick="copyCurrentPostLink()">📋 Copy Link</button>
+                            </div>
+                        </div>
+                        <div class="post-content" id="post-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <span class="status-text" id="status-text">Ready</span>
+                <span class="file-count" id="file-count">0 objects</span>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
