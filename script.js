@@ -1,5 +1,8 @@
 // Modern Portfolio JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    // Add JS enabled class for progressive enhancement
+    document.body.classList.add('js-enabled');
+    
     // Initialize navigation
     initializeNavigation();
     
@@ -155,8 +158,9 @@ function initializeSmoothScrolling() {
 
 // Scroll animations - improved and flicker-free
 function initializeScrollAnimations() {
+    // Improved animation options
     const observerOptions = {
-        threshold: 0.15,
+        threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
 
@@ -168,24 +172,30 @@ function initializeScrollAnimations() {
                 // Animate counters in about section - only once
                 if (entry.target.classList.contains('about') && !entry.target.dataset.animated) {
                     entry.target.dataset.animated = 'true';
-                    setTimeout(() => animateCounters(), 200);
+                    setTimeout(() => animateCounters(), 300);
                 }
                 
-                // Remove observer after animation to prevent re-triggering
-                observer.unobserve(entry.target);
+                // Animate skill items with stagger
+                if (entry.target.classList.contains('skills') && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    setTimeout(() => animateSkillItems(), 200);
+                }
+                
+                // Animate project cards with stagger
+                if (entry.target.classList.contains('projects') && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    setTimeout(() => animateProjectCards(), 300);
+                }
             }
         });
     }, observerOptions);
 
-    // Observe main sections with stable animation
+    // Observe main sections
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         section.classList.add('animate-on-scroll');
         observer.observe(section);
     });
-
-    // No individual card animations to prevent flickering
-    // Cards will appear with their parent sections
 }
 
 // Animate number counters - improved with one-time execution
@@ -215,13 +225,37 @@ function animateCounters() {
     });
 }
 
-// Remove problematic skill and project animations that caused flickering
+// Animate skill items with stagger effect
 function animateSkillItems() {
-    // Removed - cards now appear naturally with section animation
+    const skillCategories = document.querySelectorAll('.skill-category');
+    
+    skillCategories.forEach((category, categoryIndex) => {
+        setTimeout(() => {
+            category.style.opacity = '1';
+            category.style.transform = 'translateY(0)';
+            
+            // Animate skill list items
+            const skillItems = category.querySelectorAll('.skill-list li');
+            skillItems.forEach((item, itemIndex) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, itemIndex * 50);
+            });
+        }, categoryIndex * 150);
+    });
 }
 
+// Animate project cards with stagger effect
 function animateProjectCards() {
-    // Removed - cards now appear naturally with section animation
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    projectCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 150);
+    });
 }
 
 // Contact features
