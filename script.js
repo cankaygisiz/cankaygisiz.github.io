@@ -399,9 +399,8 @@ function initializeThemeToggle() {
 // Easter egg: Konami code
 function initializeEasterEgg() {
     const konamiCode = [
-        'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-        'KeyB', 'KeyA'
+        'KeyH', 'KeyE', 'KeyS', 'KeyO',
+        'KeyY', 'KeyA', 'KeyM'
     ];
     let userInput = [];
 
@@ -413,7 +412,7 @@ function initializeEasterEgg() {
         }
         
         if (JSON.stringify(userInput) === JSON.stringify(konamiCode)) {
-            showNotification('🎉 Konami Code activated! You found the easter egg!', 5000);
+            showNotification('🎉 Cheat code activated, cash granted!', 5000);
             // Add some fun effect here
             document.body.style.animation = 'rainbow 2s ease-in-out';
             setTimeout(() => {
