@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Can Kaygısız - IT Specialist</title>
+    <title>Can Kaygısız - IT Specialist & Cybersecurity Expert</title>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Can Kaygısız - IT Specialist, Cybersecurity Expert, and Content Creator from Northern Cyprus. Specializing in IoT Security, Penetration Testing, and Web Development.">
@@ -31,190 +31,323 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MS+Sans+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Desktop Wallpaper Screen -->
-    <div class="desktop-wallpaper" id="desktop-wallpaper">
-        <div class="wallpaper-background">
-            <!-- Desktop Icons -->
-            <div class="desktop-icons">
-                <div class="desktop-icon portfolio-folder" id="portfolio-folder">
-                    <div class="icon-image">
-                        <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Simple retro folder icon -->
-                            <defs>
-                                <linearGradient id="folderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#ffdd44"/>
-                                    <stop offset="50%" style="stop-color:#ffcc22"/>
-                                    <stop offset="100%" style="stop-color:#ee9900"/>
-                                </linearGradient>
-                                <linearGradient id="folderTab" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#fff166"/>
-                                    <stop offset="100%" style="stop-color:#ffdd44"/>
-                                </linearGradient>
-                            </defs>
-                            <!-- Folder tab -->
-                            <path d="M8 16 L28 16 L32 20 L56 20 L56 48 L8 48 Z" fill="url(#folderTab)" stroke="#cc7700" stroke-width="1"/>
-                            <!-- Main folder body -->
-                            <path d="M8 20 L56 20 L56 48 L8 48 Z" fill="url(#folderGrad)" stroke="#cc7700" stroke-width="1"/>
-                            <!-- Folder shadow/depth -->
-                            <path d="M10 22 L54 22 L54 46 L10 46 Z" fill="none" stroke="#ee9900" stroke-width="0.5" opacity="0.6"/>
-                        </svg>
-                    </div>
-                    <div class="icon-label">Can's Portfolio</div>
-                </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🔒</span>
+                <span class="logo-text">Can Kaygısız</span>
             </div>
-            
-            <!-- Desktop Taskbar -->
-            <div class="desktop-taskbar">
-                <div class="desktop-start-button">
-                    <span class="start-icon">🪟</span>
-                    <span class="start-text">Start</span>
-                </div>
-                <div class="desktop-time" id="desktop-time"></div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="desktop" id="main-desktop" style="display: none;">
-        <!-- Taskbar -->
-        <div class="taskbar">
-            <div class="start-button">
-                <span class="start-icon">🪟</span>
-                <span class="start-text">Start</span>
-            </div>
-            <div class="taskbar-items">
-                <div class="taskbar-item active">
-                    <span class="window-icon">📁</span>
-                    <span>Can Kaygısız - Portfolio</span>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Hi, I'm Can Kaygısız</span>
+                    <span class="title-line highlight">IT Specialist & Cybersecurity Expert</span>
+                </h1>
+                <p class="hero-description">
+                    24-year-old IT specialist from Northern Cyprus, specializing in IoT Security, 
+                    Penetration Testing, and Web Development. Currently pursuing Information Technology 
+                    at Eastern Mediterranean University.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 </div>
             </div>
-            <div class="system-tray">
-                <span class="time" id="current-time"></span>
+            <div class="hero-image">
+                <div class="tech-visual">
+                    <div class="tech-icon">💻</div>
+                    <div class="tech-icon">🔒</div>
+                    <div class="tech-icon">🌐</div>
+                    <div class="tech-icon">📱</div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- Main Window -->
-        <div class="window">
-            <div class="window-header">
-                <div class="window-title">
-                    <span class="window-icon">📁</span>
-                    <span>Can Kaygısız - Portfolio</span>
-                </div>
-                <div class="window-controls">
-                    <button class="window-control minimize">_</button>
-                    <button class="window-control maximize">□</button>
-                    <button class="window-control close">×</button>
-                </div>
-            </div>
-
-            <div class="window-toolbar">
-                <div class="toolbar-section">
-                    <button class="toolbar-btn">📁 File</button>
-                    <button class="toolbar-btn">✏️ Edit</button>
-                    <button class="toolbar-btn">👁️ View</button>
-                    <button class="toolbar-btn" id="theme-toggle">🌙 Dark Mode</button>
-                    <button class="toolbar-btn">❓ Help</button>
-                </div>
-                <div class="address-bar">
-                    <span class="address-label">Address:</span>
-                    <input type="text" class="address-input" value="C:\Users\Can\Portfolio" readonly>
-                    <div class="search-container">
-                        <input type="text" class="search-input" placeholder="Search posts..." id="search-input">
-                        <button class="search-btn" id="search-btn">🔍</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="window-content">
-                <!-- Sidebar -->
-                <div class="sidebar">
-                    <div class="sidebar-header">Folders</div>
-                    <div class="folder-tree">
-                        <div class="folder-item root-folder" data-category="all">
-                            <span class="folder-icon">📁</span>
-                            <span class="folder-name">Can's Portfolio</span>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a passionate IT specialist with a strong focus on cybersecurity and technology innovation. 
+                        My journey in computer technology started in childhood and has evolved into comprehensive expertise 
+                        spanning programming, cybersecurity, and digital content creation.
+                    </p>
+                    <p>
+                        Currently in my senior year at Eastern Mediterranean University, I've developed hands-on experience 
+                        with penetration testing using Kali Linux, IoT security assessment, and modern web development 
+                        technologies.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-number">4+</span>
+                            <span class="highlight-text">Years of Experience</span>
                         </div>
-                        <div class="folder-children">
-                            <div class="folder-item" data-category="tech">
-                                <span class="folder-icon">💻</span>
-                                <span class="folder-name">Technology</span>
-                            </div>
-                            <div class="folder-item" data-category="security">
-                                <span class="folder-icon">🔒</span>
-                                <span class="folder-name">Cybersecurity</span>
-                            </div>
-                            <div class="folder-item" data-category="life">
-                                <span class="folder-icon">🌱</span>
-                                <span class="folder-name">Life</span>
-                            </div>
-                            <div class="folder-item" data-category="travel">
-                                <span class="folder-icon">✈️</span>
-                                <span class="folder-name">Travel</span>
-                            </div>
-                            <div class="folder-item" data-category="code">
-                                <span class="folder-icon">📄</span>
-                                <span class="folder-name">Code</span>
-                            </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">10+</span>
+                            <span class="highlight-text">Projects Completed</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">5+</span>
+                            <span class="highlight-text">Programming Languages</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Main Content Area -->
-                <div class="main-content">
-                    <div class="content-header">
-                        <h1 class="page-title">Welcome to Can Kaygısız's Portfolio</h1>
-                        <p class="page-subtitle">IT Specialist • Cybersecurity Expert • Content Creator</p>
-                    </div>
-
-                    <!-- File List View -->
-                    <div class="file-list">
-                        <div class="file-list-header">
-                            <div class="column-header name">Name</div>
-                            <div class="column-header date">Date Modified</div>
-                            <div class="column-header type">Type</div>
-                            <div class="column-header size">Size</div>
+                <div class="about-image">
+                    <div class="profile-card">
+                        <div class="profile-avatar">👨‍💻</div>
+                        <h3>Can Kaygısız</h3>
+                        <p>IT Specialist</p>
+                        <div class="profile-badges">
+                            <span class="badge">Cybersecurity</span>
+                            <span class="badge">IoT Security</span>
+                            <span class="badge">Web Dev</span>
                         </div>
-                        <div class="file-list-content" id="file-list">
-                            <!-- Blog posts will be dynamically inserted here -->
-                        </div>
-                    </div>
-
-                    <!-- Blog Post Content -->
-                    <div class="blog-post-content" id="blog-content" style="display: none;">
-                        <div class="post-header">
-                            <button class="back-button" id="back-btn">⬅️ Back to Files</button>
-                            <h2 class="post-title" id="post-title"></h2>
-                            <div class="post-meta">
-                                <span class="post-date" id="post-date"></span>
-                                <span class="post-category" id="post-category"></span>
-                            </div>
-                            <div class="post-actions">
-                                <button class="share-btn" onclick="shareCurrentPost()">📤 Share</button>
-                                <button class="share-btn" onclick="printPost()">🖨️ Print</button>
-                                <button class="share-btn" onclick="copyCurrentPostLink()">📋 Copy Link</button>
-                            </div>
-                        </div>
-                        <div class="post-content" id="post-text"></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Status Bar -->
-            <div class="status-bar">
-                <span class="status-text" id="status-text">Ready</span>
-                <span class="file-count" id="file-count">0 objects</span>
             </div>
         </div>
+    </section>
 
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-menu-toggle" id="mobile-menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="category-header">
+                        <span class="category-icon">🔒</span>
+                        <h3>Cybersecurity</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>IoT Security Assessment</li>
+                        <li>Penetration Testing</li>
+                        <li>Kali Linux & Security Tools</li>
+                        <li>Vulnerability Assessment</li>
+                        <li>Threat Modeling (STRIDE/DREAD)</li>
+                        <li>Network Security Analysis</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <div class="category-header">
+                        <span class="category-icon">�</span>
+                        <h3>Programming</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>C++ & Java</li>
+                        <li>Dart & Flutter</li>
+                        <li>HTML/CSS/JavaScript</li>
+                        <li>Python (Security Scripts)</li>
+                        <li>MSSQL Database</li>
+                        <li>Git Version Control</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <div class="category-header">
+                        <span class="category-icon">🎨</span>
+                        <h3>Creative Tools</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>Adobe Premiere Pro</li>
+                        <li>Adobe Photoshop</li>
+                        <li>Vegas Pro (Sony)</li>
+                        <li>Video Editing & Production</li>
+                        <li>Sound Production</li>
+                        <li>Graphic Design</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <div class="category-header">
+                        <span class="category-icon">�️</span>
+                        <h3>Security Tools</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>Metasploit Framework</li>
+                        <li>OpenVAS Scanner</li>
+                        <li>Nmap & Wireshark</li>
+                        <li>beEF-XSS Framework</li>
+                        <li>Burp Suite</li>
+                        <li>OWASP ZAP</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🔍</span>
+                        <h3>IoT Security Scanner</h3>
+                    </div>
+                    <p class="project-description">
+                        Automated vulnerability assessment tool for IoT devices with network discovery 
+                        and comprehensive security reporting.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Nmap</span>
+                        <span class="tech-tag">Kali Linux</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Private Repo 🔒</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🛡️</span>
+                        <h3>Penetration Testing Framework</h3>
+                    </div>
+                    <p class="project-description">
+                        Custom framework for streamlined penetration testing workflows with 
+                        automated reconnaissance and reporting.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Metasploit</span>
+                        <span class="tech-tag">Wireshark</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Private Repo 🔒</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">�</span>
+                        <h3>CyberSafe Mobile App</h3>
+                    </div>
+                    <p class="project-description">
+                        Flutter-based mobile application for real-time IoT device security monitoring 
+                        with alert notifications.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Dart</span>
+                        <span class="tech-tag">Firebase</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Private Repo 🔒</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🌐</span>
+                        <h3>Portfolio Website</h3>
+                    </div>
+                    <p class="project-description">
+                        Modern, responsive portfolio website showcasing technical skills and projects 
+                        with mobile-first design approach.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Responsive</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cankaygisiz/cankaygisiz.github.io" class="project-link">View Code 📝</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p class="contact-description">
+                        I'm always excited to discuss technology, cybersecurity, or potential collaboration 
+                        opportunities. Feel free to reach out!
+                    </p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <div class="contact-details">
+                                <h4>Location</h4>
+                                <p>Northern Cyprus, Nicosia</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>can_kaygisiz@yahoo.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">🎓</span>
+                            <div class="contact-details">
+                                <h4>University</h4>
+                                <p>Eastern Mediterranean University</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <h3>Connect With Me</h3>
+                    <div class="social-grid">
+                        <a href="https://github.com/cankaygisiz" target="_blank" class="social-link">
+                            <span class="social-icon">📂</span>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/cankaygisiz" target="_blank" class="social-link">
+                            <span class="social-icon">💼</span>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://twitter.com/CanKaygisiz9" target="_blank" class="social-link">
+                            <span class="social-icon">🐦</span>
+                            <span>Twitter</span>
+                        </a>
+                        <a href="https://www.instagram.com/can_kaygisiz" target="_blank" class="social-link">
+                            <span class="social-icon">📸</span>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Can Kaygısız. All rights reserved.</p>
+                <p>IT Specialist • Cybersecurity Expert • Content Creator</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
