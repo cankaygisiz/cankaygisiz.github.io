@@ -18,12 +18,23 @@ function initializeNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navbar = document.querySelector('.navbar');
 
     // Mobile menu toggle
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
 
         // Close mobile menu when clicking on a link
@@ -31,6 +42,7 @@ function initializeNavigation() {
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
+                document.body.style.overflow = '';
             });
         });
 
@@ -39,42 +51,80 @@ function initializeNavigation() {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     }
 
-    // Navbar scroll effect
+    // Enhanced navbar scroll effect
     window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
         if (window.scrollY > 50) {
             navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            navbar.style.borderBottom = '1px solid rgba(0, 0, 0, 0.15)';
         } else {
             navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             navbar.style.boxShadow = 'none';
+            navbar.style.borderBottom = '1px solid rgba(0, 0, 0, 0.1)';
         }
     });
 
-    // Active nav link highlighting
+    // Active nav link highlighting with smooth transitions
     const sections = document.querySelectorAll('section');
     const navLinksArray = Array.from(navLinks);
 
-    window.addEventListener('scroll', function() {
-        let current = '';
+    function updateActiveNavLink() {
+        let current = 'home'; // Default to home
+        const scrollPosition = window.pageYOffset + 100;
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= sectionTop - 100) {
-                current = section.getAttribute('id');
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                current = sectionId;
             }
         });
 
         navLinksArray.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
+            const href = link.getAttribute('href').substring(1);
+            if (href === current) {
                 link.classList.add('active');
             }
         });
+    }
+
+    // Throttle scroll events for better performance
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateActiveNavLink);
+            ticking = true;
+            setTimeout(() => { ticking = false; }, 10);
+        }
+    });
+
+    // Set initial active state
+    updateActiveNavLink();
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
 }
 
@@ -103,57 +153,52 @@ function initializeSmoothScrolling() {
     });
 }
 
-// Scroll animations
+// Scroll animations - improved and flicker-free
 function initializeScrollAnimations() {
     const observerOptions = {
-        threshold: 0.1,
+        threshold: 0.15,
         rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
+                entry.target.classList.add('visible');
                 
-                // Animate counters in about section
-                if (entry.target.classList.contains('about')) {
-                    animateCounters();
+                // Animate counters in about section - only once
+                if (entry.target.classList.contains('about') && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    setTimeout(() => animateCounters(), 200);
                 }
                 
-                // Animate skill items
-                if (entry.target.classList.contains('skills')) {
-                    animateSkillItems();
-                }
-                
-                // Animate project cards
-                if (entry.target.classList.contains('projects')) {
-                    animateProjectCards();
-                }
+                // Remove observer after animation to prevent re-triggering
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe all main sections
+    // Observe main sections with stable animation
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
+        section.classList.add('animate-on-scroll');
         observer.observe(section);
     });
 
-    // Observe individual cards for staggered animations
-    const cards = document.querySelectorAll('.skill-category, .project-card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        observer.observe(card);
-    });
+    // No individual card animations to prevent flickering
+    // Cards will appear with their parent sections
 }
 
-// Animate number counters
+// Animate number counters - improved with one-time execution
 function animateCounters() {
     const counters = document.querySelectorAll('.highlight-number');
     
     counters.forEach(counter => {
+        if (counter.dataset.animated) return; // Prevent re-animation
+        
+        counter.dataset.animated = 'true';
         const target = parseInt(counter.innerText);
-        const increment = target / 50; // Animation duration control
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
         let current = 0;
         
         const updateCounter = () => {
@@ -170,28 +215,13 @@ function animateCounters() {
     });
 }
 
-// Animate skill items
+// Remove problematic skill and project animations that caused flickering
 function animateSkillItems() {
-    const skillItems = document.querySelectorAll('.skill-list li');
-    
-    skillItems.forEach((item, index) => {
-        setTimeout(() => {
-            item.style.opacity = '1';
-            item.style.transform = 'translateX(0)';
-        }, index * 100);
-    });
+    // Removed - cards now appear naturally with section animation
 }
 
-// Animate project cards
 function animateProjectCards() {
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    projectCards.forEach((card, index) => {
-        setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 150);
-    });
+    // Removed - cards now appear naturally with section animation
 }
 
 // Contact features
