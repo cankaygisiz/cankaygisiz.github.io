@@ -668,6 +668,118 @@ section {
     font-size: 0.9rem;
 }
 
+/* Dark mode theme */
+body.dark-mode {
+  --color-bg: #14161a;
+  --color-text: #e3e6ee;
+  --color-primary: #90caf9;
+  --color-secondary: #64b5f6;
+  --color-navbar: rgba(20,22,26,0.98);
+  --color-card: #23283a;
+  --color-card-shadow: rgba(0,0,0,0.5);
+  background: linear-gradient(135deg, #181c24 0%, #23283a 100%) fixed;
+}
+
+body.dark-mode .navbar {
+  background: var(--color-navbar) !important;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.35);
+  border-bottom: 1px solid #23283a;
+}
+
+/* Section backgrounds and containers */
+.container, .skills, .projects, .about, .contact, .footer, section {
+  background: transparent;
+  transition: background 0.3s;
+}
+
+body.dark-mode .container,
+body.dark-mode .skills,
+body.dark-mode .projects,
+body.dark-mode .about,
+body.dark-mode .contact,
+body.dark-mode .footer,
+body.dark-mode section {
+  background: transparent !important;
+}
+
+body.dark-mode .skills,
+body.dark-mode .projects,
+body.dark-mode .about,
+body.dark-mode .contact {
+  background: none !important;
+}
+
+body.dark-mode .footer {
+  background: #181c24;
+  color: #e3e6ee;
+}
+
+body.dark-mode .section-title {
+  color: #e3e6ee;
+}
+
+body.dark-mode .nav-menu {
+  background: rgba(24,28,36,0.98) !important;
+}
+
+body.dark-mode .nav-link,
+body.dark-mode .nav-logo,
+body.dark-mode .logo-text {
+  color: #e3e6ee !important;
+}
+
+body.dark-mode .nav-link.active {
+  color: #90caf9 !important;
+}
+
+body.dark-mode .profile-card,
+body.dark-mode .skill-category,
+body.dark-mode .project-card,
+body.dark-mode .social-link {
+  background: #23283a !important;
+  color: #e3e6ee !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid #23283a;
+}
+
+body.dark-mode .badge,
+body.dark-mode .tech-tag {
+  background: #181c24 !important;
+  color: #90caf9 !important;
+}
+
+body.dark-mode .highlight-number {
+  color: #90caf9 !important;
+}
+
+body.dark-mode .btn-primary {
+  background: #1976d2 !important;
+  color: #fff !important;
+}
+body.dark-mode .btn-secondary {
+  background: #23283a !important;
+  color: #90caf9 !important;
+  border: 1px solid #90caf9 !important;
+}
+
+body.dark-mode .category-icon,
+body.dark-mode .project-icon,
+body.dark-mode .contact-icon,
+body.dark-mode .profile-avatar {
+  filter: brightness(1.2) drop-shadow(0 0 2px #90caf9);
+}
+
+body.dark-mode .skill-list li::before {
+  color: #90caf9 !important;
+}
+
+body.dark-mode .skill-list li,
+body.dark-mode .project-description,
+body.dark-mode .contact-description,
+body.dark-mode .highlight-text {
+  color: #b0b8c9 !important;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     html {

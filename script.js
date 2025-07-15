@@ -396,6 +396,35 @@ function initializeThemeToggle() {
     // document.body.appendChild(themeToggle);
 }
 
+// Dark mode toggle logic
+(function() {
+  const toggle = document.getElementById('dark-toggle');
+  const body = document.body;
+  const storageKey = 'darkMode';
+
+  function setDarkMode(on) {
+    if (on) {
+      body.classList.add('dark-mode');
+      localStorage.setItem(storageKey, '1');
+    } else {
+      body.classList.remove('dark-mode');
+      localStorage.setItem(storageKey, '0');
+    }
+  }
+
+  // Initial state from localStorage or system preference
+  const userPref = localStorage.getItem(storageKey);
+  if (userPref === '1' || (userPref === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    setDarkMode(true);
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', function() {
+      setDarkMode(!body.classList.contains('dark-mode'));
+    });
+  }
+})();
+
 // Easter egg: Konami code
 function initializeEasterEgg() {
     const konamiCode = [
