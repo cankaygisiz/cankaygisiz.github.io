@@ -95,6 +95,67 @@
     <div class="custom-cursor"></div>
     <div class="custom-cursor-dot"></div>
     
+    <!-- Particle Background -->
+    <canvas id="particle-canvas" class="particle-canvas"></canvas>
+    
+    <!-- Keyboard Shortcuts Modal -->
+    <div class="shortcuts-modal" id="shortcuts-modal">
+        <div class="shortcuts-content">
+            <div class="shortcuts-header">
+                <h2>⌨️ Keyboard Shortcuts</h2>
+                <button class="close-shortcuts" id="close-shortcuts" aria-label="Close shortcuts guide">×</button>
+            </div>
+            <div class="shortcuts-body">
+                <div class="shortcut-group">
+                    <h3>Navigation</h3>
+                    <div class="shortcut-item">
+                        <kbd>1</kbd>
+                        <span>Go to Home</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>2</kbd>
+                        <span>Go to About</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>3</kbd>
+                        <span>Go to Skills</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>4</kbd>
+                        <span>Go to Experience</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>5</kbd>
+                        <span>Go to Projects</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>6</kbd>
+                        <span>Go to Contact</span>
+                    </div>
+                </div>
+                <div class="shortcut-group">
+                    <h3>Actions</h3>
+                    <div class="shortcut-item">
+                        <kbd>D</kbd>
+                        <span>Toggle Dark Mode</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>↑</kbd>
+                        <span>Scroll to Top</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>?</kbd>
+                        <span>Show/Hide Shortcuts</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>ESC</kbd>
+                        <span>Close Modal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loader">
@@ -663,7 +724,14 @@
                             <span class="contact-icon">📧</span>
                             <div class="contact-details">
                                 <h4>Email</h4>
-                                <p>can_kaygisiz@yahoo.com</p>
+                                <p id="contact-email">can_kaygisiz@yahoo.com</p>
+                                <button class="copy-btn" data-copy="can_kaygisiz@yahoo.com" aria-label="Copy email">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    <span>Copy</span>
+                                </button>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -731,6 +799,44 @@
                         <span class="btn-loader" style="display: none;">Sending...</span>
                     </button>
                 </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Section -->
+    <section class="share-section">
+        <div class="container">
+            <div class="share-container">
+                <h3>Share This Portfolio</h3>
+                <p>Found my work interesting? Share it with your network!</p>
+                <div class="share-buttons">
+                    <button class="share-btn share-twitter" data-platform="twitter" aria-label="Share on Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                        </svg>
+                        <span>Twitter</span>
+                    </button>
+                    <button class="share-btn share-linkedin" data-platform="linkedin" aria-label="Share on LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        <span>LinkedIn</span>
+                    </button>
+                    <button class="share-btn share-facebook" data-platform="facebook" aria-label="Share on Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                        <span>Facebook</span>
+                    </button>
+                    <button class="share-btn share-copy" id="share-copy-link" aria-label="Copy link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                        <span>Copy Link</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>

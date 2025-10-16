@@ -44,6 +44,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize stats counter
     initializeStatsCounter();
+    
+    // Initialize particle background
+    initializeParticles();
+    
+    // Initialize share buttons
+    initializeShareButtons();
+    
+    // Initialize copy buttons
+    initializeCopyButtons();
+    
+    // Initialize keyboard shortcuts
+    initializeKeyboardShortcuts();
 });
 
 // Navigation functionality
@@ -199,11 +211,22 @@ function initializeSmoothScrolling() {
                 const targetSection = document.getElementById(targetId);
                 
                 if (targetSection) {
-                    const offsetTop = targetSection.offsetTop - 70; // Account for fixed navbar
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                    // Add transition effect
+                    document.body.style.opacity = '0.7';
+                    document.body.style.transition = 'opacity 0.3s ease';
+                    
+                    setTimeout(() => {
+                        const offsetTop = targetSection.offsetTop - 70; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Fade back in
+                        setTimeout(() => {
+                            document.body.style.opacity = '1';
+                        }, 300);
+                    }, 150);
                 }
             }
         });
@@ -945,6 +968,296 @@ function initializeStatsCounter() {
     const statsSection = document.querySelector('.stats-dashboard');
     if (statsSection) {
         observer.observe(statsSection);
+    }
+}
+
+// Particle Background Animation
+function initializeParticles() {
+    const canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    
+    // Skip on mobile devices for performance
+    if (window.innerWidth < 768) return;
+    
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationFrameId;
+    
+    // Set canvas size
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Particle class
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.opacity = Math.random() * 0.5 + 0.2;
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            // Wrap around edges
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+        
+        draw() {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            ctx.fillStyle = isDarkMode 
+                ? `rgba(144, 202, 249, ${this.opacity})` 
+                : `rgba(102, 126, 234, ${this.opacity})`;
+            
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    
+    // Create particles
+    function createParticles() {
+        const particleCount = Math.min(100, Math.floor((canvas.width * canvas.height) / 15000));
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+    }
+    
+    createParticles();
+    
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        
+        // Draw connections
+        particles.forEach((particleA, indexA) => {
+            particles.slice(indexA + 1).forEach(particleB => {
+                const dx = particleA.x - particleB.x;
+                const dy = particleA.y - particleB.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    const isDarkMode = document.body.classList.contains('dark-mode');
+                    const opacity = (1 - distance / 100) * 0.2;
+                    ctx.strokeStyle = isDarkMode
+                        ? `rgba(144, 202, 249, ${opacity})`
+                        : `rgba(102, 126, 234, ${opacity})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particleA.x, particleA.y);
+                    ctx.lineTo(particleB.x, particleB.y);
+                    ctx.stroke();
+                }
+            });
+        });
+        
+        animationFrameId = requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Pause animation when tab is not visible
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            cancelAnimationFrame(animationFrameId);
+        } else {
+            animate();
+        }
+    });
+}
+
+// Share Buttons
+function initializeShareButtons() {
+    const shareButtons = document.querySelectorAll('.share-btn[data-platform]');
+    const copyLinkBtn = document.getElementById('share-copy-link');
+    
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent('Check out Can Kaygısız\'s Portfolio - IT Specialist & Cybersecurity Expert');
+    const text = encodeURIComponent('Amazing portfolio showcasing IT management, cybersecurity, and software development skills!');
+    
+    shareButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const platform = this.getAttribute('data-platform');
+            let shareUrl = '';
+            
+            switch(platform) {
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        });
+    });
+    
+    // Copy link functionality
+    if (copyLinkBtn) {
+        copyLinkBtn.addEventListener('click', async function() {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                const originalText = this.querySelector('span').textContent;
+                this.querySelector('span').textContent = 'Copied!';
+                this.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                
+                showNotification('Link copied to clipboard!', 'success');
+                
+                setTimeout(() => {
+                    this.querySelector('span').textContent = originalText;
+                    this.style.background = '';
+                }, 2000);
+            } catch (err) {
+                showNotification('Failed to copy link', 'error');
+            }
+        });
+    }
+}
+
+// Copy to Clipboard Functionality
+function initializeCopyButtons() {
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    
+    copyButtons.forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const textToCopy = this.getAttribute('data-copy');
+            const btnText = this.querySelector('span');
+            const originalText = btnText.textContent;
+            
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                
+                // Visual feedback
+                this.classList.add('copied');
+                btnText.textContent = 'Copied!';
+                
+                showNotification(`${textToCopy} copied to clipboard!`, 'success');
+                
+                setTimeout(() => {
+                    this.classList.remove('copied');
+                    btnText.textContent = originalText;
+                }, 2000);
+            } catch (err) {
+                showNotification('Failed to copy', 'error');
+                console.error('Failed to copy:', err);
+            }
+        });
+    });
+}
+
+// Keyboard Shortcuts
+function initializeKeyboardShortcuts() {
+    const modal = document.getElementById('shortcuts-modal');
+    const closeBtn = document.getElementById('close-shortcuts');
+    
+    if (!modal) return;
+    
+    // Close modal function
+    function closeModal() {
+        modal.classList.remove('active');
+    }
+    
+    // Close button
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Keyboard event listeners
+    document.addEventListener('keydown', function(e) {
+        // Don't trigger shortcuts when typing in input fields
+        if (e.target.matches('input, textarea')) return;
+        
+        switch(e.key.toLowerCase()) {
+            case '?':
+                e.preventDefault();
+                modal.classList.toggle('active');
+                break;
+            case 'escape':
+                closeModal();
+                break;
+            case '1':
+                e.preventDefault();
+                scrollToSection('home');
+                break;
+            case '2':
+                e.preventDefault();
+                scrollToSection('about');
+                break;
+            case '3':
+                e.preventDefault();
+                scrollToSection('skills');
+                break;
+            case '4':
+                e.preventDefault();
+                scrollToSection('experience');
+                break;
+            case '5':
+                e.preventDefault();
+                scrollToSection('projects');
+                break;
+            case '6':
+                e.preventDefault();
+                scrollToSection('contact');
+                break;
+            case 'd':
+                e.preventDefault();
+                toggleDarkMode();
+                break;
+            case 'arrowup':
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                break;
+        }
+    });
+    
+    // Helper function to scroll to section
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const offsetTop = section.offsetTop - 70;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    // Helper function to toggle dark mode
+    function toggleDarkMode() {
+        const darkToggle = document.getElementById('dark-toggle');
+        if (darkToggle) {
+            darkToggle.click();
+        }
     }
 }
 

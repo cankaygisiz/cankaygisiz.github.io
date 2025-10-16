@@ -17,6 +17,30 @@ body {
     background-color: #ffffff;
     overflow-x: hidden;
     cursor: none;
+    position: relative;
+}
+
+/* Particle Background Canvas */
+.particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+body.dark-mode .particle-canvas {
+    opacity: 0.3;
+}
+
+/* Hide particles on mobile for performance */
+@media (max-width: 768px) {
+    .particle-canvas {
+        display: none;
+    }
 }
 
 /* Custom Cursor */
@@ -140,6 +164,159 @@ body.dark-mode .custom-cursor.cursor-hover {
     }
     100% {
         width: 0%;
+    }
+}
+
+/* Keyboard Shortcuts Modal */
+.shortcuts-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.shortcuts-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.shortcuts-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.shortcuts-modal.active .shortcuts-content {
+    transform: scale(1);
+}
+
+.shortcuts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.shortcuts-header h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0;
+}
+
+.close-shortcuts {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: #999;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-shortcuts:hover {
+    background: #f0f0f0;
+    color: #333;
+    transform: rotate(90deg);
+}
+
+.shortcuts-body {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.shortcut-group h3 {
+    font-size: 1.2rem;
+    color: #667eea;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+kbd {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: 'Inter', monospace;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 35px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.shortcut-item span {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+body.dark-mode .shortcuts-content {
+    background: #23283a;
+}
+
+body.dark-mode .shortcuts-header {
+    border-bottom-color: #2c3345;
+}
+
+body.dark-mode .shortcuts-header h2 {
+    color: #e3e6ee;
+}
+
+body.dark-mode .close-shortcuts {
+    color: #666;
+}
+
+body.dark-mode .close-shortcuts:hover {
+    background: #2c3345;
+    color: #e3e6ee;
+}
+
+body.dark-mode .shortcut-group h3 {
+    color: #90caf9;
+}
+
+body.dark-mode .shortcut-item span {
+    color: #b0b8c9;
+}
+
+body.dark-mode kbd {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+}
+
+@media (max-width: 768px) {
+    .shortcuts-body {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 
@@ -1529,6 +1706,45 @@ body.dark-mode .author-avatar {
     color: #666;
 }
 
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    margin-top: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
+.copy-btn.copied {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+body.dark-mode .copy-btn {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    box-shadow: 0 2px 8px rgba(144, 202, 249, 0.3);
+}
+
+body.dark-mode .copy-btn:hover {
+    box-shadow: 0 4px 12px rgba(144, 202, 249, 0.4);
+}
+
 .social-links h3 {
     color: #333;
     margin-bottom: 30px;
@@ -1563,6 +1779,93 @@ body.dark-mode .author-avatar {
 
 .social-icon {
     font-size: 1.5rem;
+}
+
+/* Share Section */
+.share-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+    padding: 60px 0;
+}
+
+.share-container {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.share-container h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.share-container p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.share-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.share-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.share-btn:hover svg {
+    transform: scale(1.1);
+}
+
+.share-twitter {
+    background: linear-gradient(135deg, #1DA1F2 0%, #0d8bd9 100%);
+}
+
+.share-linkedin {
+    background: linear-gradient(135deg, #0077B5 0%, #00669c 100%);
+}
+
+.share-facebook {
+    background: linear-gradient(135deg, #1877F2 0%, #0d65d9 100%);
+}
+
+.share-copy {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body.dark-mode .share-section {
+    background: linear-gradient(135deg, #1a1f2e 0%, #23283a 100%);
+}
+
+body.dark-mode .share-container h3 {
+    color: #e3e6ee;
+}
+
+body.dark-mode .share-container p {
+    color: #b0b8c9;
 }
 
 /* Contact Form */
