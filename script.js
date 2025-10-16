@@ -32,6 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize parallax effects
     initializeParallax();
+    
+    // Initialize typing animation
+    initializeTypingAnimation();
+    
+    // Initialize custom cursor
+    initializeCustomCursor();
+    
+    // Initialize project filters
+    initializeProjectFilters();
+    
+    // Initialize stats counter
+    initializeStatsCounter();
 });
 
 // Navigation functionality
@@ -228,6 +240,12 @@ function initializeScrollAnimations() {
                     entry.target.dataset.animated = 'true';
                     setTimeout(() => animateProjectCards(), 300);
                 }
+                
+                // Animate timeline items with stagger
+                if (entry.target.classList.contains('timeline') && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    setTimeout(() => animateTimelineItems(), 200);
+                }
             }
         });
     }, observerOptions);
@@ -306,6 +324,17 @@ function animateProjectCards() {
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
         }, index * 150);
+    });
+}
+
+// Animate timeline items with stagger effect
+function animateTimelineItems() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    timelineItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.add('fade-in');
+        }, index * 200);
     });
 }
 
@@ -715,6 +744,209 @@ function initializeParallax() {
 window.addEventListener('error', function(e) {
     console.error('JavaScript error:', e.error);
 });
+
+// Typing Animation
+function initializeTypingAnimation() {
+    const typingText = document.getElementById('typing-text');
+    if (!typingText) return;
+    
+    const phrases = [
+        'Cybersecurity Expert 🔒',
+        'IoT Security Specialist 📡',
+        'Full-Stack Developer 💻',
+        'Business Manager 📊',
+        'Penetration Tester 🛡️',
+        'Software Engineer 🚀'
+    ];
+    
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+    
+    function type() {
+        const currentPhrase = phrases[phraseIndex];
+        
+        if (isPaused) {
+            isPaused = false;
+            setTimeout(type, 2000); // Pause before deleting
+            return;
+        }
+        
+        if (isDeleting) {
+            typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            isPaused = true;
+            isDeleting = true;
+            typeSpeed = 2000;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(type, typeSpeed);
+    }
+    
+    // Start typing animation after a short delay
+    setTimeout(type, 1000);
+}
+
+// Custom Cursor
+function initializeCustomCursor() {
+    // Check if device supports hover (not a touch device)
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    
+    if (isTouchDevice) {
+        document.body.style.cursor = 'auto';
+        return;
+    }
+    
+    const cursor = document.querySelector('.custom-cursor');
+    const cursorDot = document.querySelector('.custom-cursor-dot');
+    
+    if (!cursor || !cursorDot) return;
+    
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    let dotX = 0, dotY = 0;
+    
+    // Update mouse position
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    // Smooth cursor follow
+    function animateCursor() {
+        // Smooth lag effect for main cursor
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
+        
+        // Faster follow for dot
+        dotX += (mouseX - dotX) * 0.25;
+        dotY += (mouseY - dotY) * 0.25;
+        
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        
+        cursorDot.style.left = dotX + 'px';
+        cursorDot.style.top = dotY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+    
+    animateCursor();
+    
+    // Add hover effect for interactive elements
+    const hoverElements = document.querySelectorAll('a, button, .btn, .project-card, .cert-card, .skill-category, .timeline-content, input, textarea');
+    
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('cursor-hover');
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('cursor-hover');
+        });
+    });
+    
+    // Hide cursor when leaving window
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        cursorDot.style.opacity = '0';
+    });
+    
+    document.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '1';
+        cursorDot.style.opacity = '1';
+    });
+}
+
+// Project Filtering
+function initializeProjectFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    if (filterButtons.length === 0 || projectCards.length === 0) return;
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter projects with animation
+            projectCards.forEach((card, index) => {
+                const categories = card.getAttribute('data-category');
+                
+                if (filter === 'all' || (categories && categories.includes(filter))) {
+                    // Show card
+                    setTimeout(() => {
+                        card.classList.remove('hidden');
+                        card.style.animation = 'fadeInUp 0.5s ease forwards';
+                    }, index * 100);
+                } else {
+                    // Hide card
+                    card.style.animation = 'fadeOut 0.3s ease forwards';
+                    setTimeout(() => {
+                        card.classList.add('hidden');
+                    }, 300);
+                }
+            });
+        });
+    });
+}
+
+// Stats Counter Animation
+function initializeStatsCounter() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length === 0) return;
+    
+    let hasAnimated = false;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-target'));
+                    const duration = 2000; // 2 seconds
+                    const increment = target / (duration / 16); // 60fps
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            stat.textContent = Math.floor(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            stat.textContent = target;
+                        }
+                    };
+                    
+                    updateCounter();
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    const statsSection = document.querySelector('.stats-dashboard');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+}
 
 // Performance monitoring
 window.addEventListener('load', function() {

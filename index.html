@@ -91,6 +91,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+    
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loader">
@@ -136,6 +140,7 @@
                 <a href="#home" class="nav-link" role="menuitem">Home</a>
                 <a href="#about" class="nav-link" role="menuitem">About</a>
                 <a href="#skills" class="nav-link" role="menuitem">Skills</a>
+                <a href="#experience" class="nav-link" role="menuitem">Experience</a>
                 <a href="#projects" class="nav-link" role="menuitem">Projects</a>
                 <a href="#contact" class="nav-link" role="menuitem">Contact</a>
             </div>
@@ -155,6 +160,10 @@
                     <span class="title-line">Hi, I'm Can Kaygısız</span>
                     <span class="title-line highlight">IT Specialist & Business Manager</span>
                 </h1>
+                <p class="hero-subtitle">
+                    <span class="typing-text" id="typing-text"></span>
+                    <span class="typing-cursor">|</span>
+                </p>
                 <p class="hero-description">
                     IT specialist from Northern Cyprus, specializing in integrated software solutions, 
                     software development, and IoT security. Currently serving as Chief Executive Officer at Gigabyte Ltd.
@@ -178,6 +187,34 @@
                     <div class="tech-icon">🔒</div>
                     <div class="tech-icon">🌐</div>
                     <div class="tech-icon">📱</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Dashboard -->
+    <section class="stats-dashboard">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💼</div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚀</div>
+                    <div class="stat-number" data-target="25">0</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎓</div>
+                    <div class="stat-number" data-target="6">0</div>
+                    <div class="stat-label">Certifications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Skills Mastered</div>
                 </div>
             </div>
         </div>
@@ -325,6 +362,76 @@
         </div>
     </section>
 
+    <!-- Experience Timeline Section -->
+    <section class="timeline" id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience & Education</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024 - Present</div>
+                        <h3>Chief Executive Officer</h3>
+                        <h4>Gigabyte Ltd</h4>
+                        <p>Leading strategic initiatives in IT solutions, software development, and business operations. Managing cross-functional teams and driving innovation in cybersecurity and IoT security services.</p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">Leadership</span>
+                            <span class="timeline-tag">Strategy</span>
+                            <span class="timeline-tag">Innovation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022 - 2024</div>
+                        <h3>IT Specialist & Security Consultant</h3>
+                        <h4>Gigabyte Ltd</h4>
+                        <p>Specialized in cybersecurity, IoT security assessments, and penetration testing. Developed integrated software solutions and managed IT infrastructure projects.</p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">Cybersecurity</span>
+                            <span class="timeline-tag">IoT Security</span>
+                            <span class="timeline-tag">Pen Testing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - 2024</div>
+                        <h3>Bachelor's Degree in IT Management</h3>
+                        <h4>Eastern Mediterranean University</h4>
+                        <p>Comprehensive study of IT management, business administration, software development, and information systems. Graduated with strong foundation in both technical and managerial aspects.</p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">Education</span>
+                            <span class="timeline-tag">IT Management</span>
+                            <span class="timeline-tag">Business</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018 - 2022</div>
+                        <h3>Software Developer & Security Enthusiast</h3>
+                        <h4>Freelance & Self-Learning</h4>
+                        <p>Built foundation in programming, web development, and cybersecurity. Developed multiple projects and gained hands-on experience with security tools and frameworks.</p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">Development</span>
+                            <span class="timeline-tag">Self-Learning</span>
+                            <span class="timeline-tag">Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Certifications Section -->
     <section class="certifications" id="certifications">
         <div class="container">
@@ -385,8 +492,18 @@
     <section class="projects" id="projects">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
+            
+            <!-- Project Filters -->
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="iot">IoT</button>
+            </div>
+            
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-category="security iot">
                     <div class="project-header">
                         <span class="project-icon">🔍</span>
                         <h3>IoT Security Scanner</h3>
@@ -405,7 +522,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="security">
                     <div class="project-header">
                         <span class="project-icon">🛡️</span>
                         <h3>Penetration Testing Framework</h3>
@@ -424,7 +541,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="mobile iot">
                     <div class="project-header">
                         <span class="project-icon">📱</span>
                         <h3>CyberSafe Mobile App</h3>
@@ -443,7 +560,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="web">
                     <div class="project-header">
                         <span class="project-icon">🌐</span>
                         <h3>Portfolio Website</h3>
@@ -460,7 +577,6 @@
                     <div class="project-links">
                         <a href="https://github.com/cankaygisiz/cankaygisiz.github.io" class="project-link">View Code 📝</a>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
