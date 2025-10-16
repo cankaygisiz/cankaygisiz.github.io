@@ -25,52 +25,133 @@
     <meta name="twitter:description" content="IT Specialist and Cybersecurity Expert specializing in IoT Security and Penetration Testing.">
     <meta name="twitter:image" content="https://cankaygisiz.github.io/images/portfolio-preview.jpg">
     
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://cankaygisiz.github.io">
+    
+    <!-- Language -->
+    <meta http-equiv="content-language" content="en">
+    <link rel="alternate" hreflang="en" href="https://cankaygisiz.github.io">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="apple-touch-icon" href="icon.svg">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     
     <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Can Kaygısız",
+      "url": "https://cankaygisiz.github.io",
+      "image": "https://cankaygisiz.github.io/images/portfolio-preview.jpg",
+      "jobTitle": "IT Specialist & Business Manager",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Gigabyte Ltd."
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Eastern Mediterranean University"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nicosia",
+        "addressRegion": "Northern Cyprus"
+      },
+      "email": "can_kaygisiz@yahoo.com",
+      "sameAs": [
+        "https://github.com/cankaygisiz",
+        "https://linkedin.com/in/cankaygisiz",
+        "https://x.com/CanKaygisiz9",
+        "https://www.instagram.com/can_kaygisiz"
+      ],
+      "knowsAbout": [
+        "Cybersecurity",
+        "IoT Security",
+        "Penetration Testing",
+        "Web Development",
+        "Business Management",
+        "Software Development"
+      ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loader">
+            <div class="lock-icon">🔒</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Loading Portfolio...</p>
+        </div>
+    </div>
+    
+    <!-- Skip to main content for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Mobile menu backdrop -->
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+    
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+    
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">
-                <span class="logo-icon">🔒</span>
+            <a href="#home" class="nav-logo" aria-label="Can Kaygısız - Home">
+                <span class="logo-icon" aria-hidden="true">🔒</span>
                 <span class="logo-text">Can Kaygısız</span>
             </a>
             
             <!-- Dark mode toggle -->
-            <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">
-                <span class="toggle-track">
+            <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+                <span class="toggle-track" aria-hidden="true">
                     <span class="toggle-thumb"></span>
                 </span>
-                <span class="toggle-icon toggle-sun">☀️</span>
-                <span class="toggle-icon toggle-moon">🌙</span>
+                <span class="toggle-icon toggle-sun" aria-hidden="true">☀️</span>
+                <span class="toggle-icon toggle-moon" aria-hidden="true">🌙</span>
             </button>
             
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
+            <div class="nav-menu" id="nav-menu" role="menubar">
+                <a href="#home" class="nav-link" role="menuitem">Home</a>
+                <a href="#about" class="nav-link" role="menuitem">About</a>
+                <a href="#skills" class="nav-link" role="menuitem">Skills</a>
+                <a href="#projects" class="nav-link" role="menuitem">Projects</a>
+                <a href="#contact" class="nav-link" role="menuitem">Contact</a>
             </div>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line" aria-hidden="true"></span>
+                <span class="hamburger-line" aria-hidden="true"></span>
+                <span class="hamburger-line" aria-hidden="true"></span>
             </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-container">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="hero-container" id="main-content">
             <div class="hero-content">
-                <h1 class="hero-title">
+                <h1 class="hero-title" id="hero-title">
                     <span class="title-line">Hi, I'm Can Kaygısız</span>
                     <span class="title-line highlight">IT Specialist & Business Manager</span>
                 </h1>
@@ -81,9 +162,17 @@
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary">View My Work</a>
                     <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    <a href="#" class="btn btn-outline" id="download-cv" aria-label="Download CV">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download CV
+                    </a>
                 </div>
             </div>
-            <div class="hero-image">
+            <div class="hero-image" aria-hidden="true">
                 <div class="tech-visual">
                     <div class="tech-icon">💻</div>
                     <div class="tech-icon">🔒</div>
@@ -339,24 +428,59 @@
                 <div class="social-links">
                     <h3>Connect With Me</h3>
                     <div class="social-grid">
-                        <a href="https://github.com/cankaygisiz" target="_blank" class="social-link">
-                            <span class="social-icon">📂</span>
+                        <a href="https://github.com/cankaygisiz" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <span class="social-icon" aria-hidden="true">📂</span>
                             <span>GitHub</span>
                         </a>
-                        <a href="https://linkedin.com/in/cankaygisiz" target="_blank" class="social-link">
-                            <span class="social-icon">💼</span>
+                        <a href="https://linkedin.com/in/cankaygisiz" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <span class="social-icon" aria-hidden="true">💼</span>
                             <span>LinkedIn</span>
                         </a>
-                        <a href="https://x.com/CanKaygisiz9" target="_blank" class="social-link">
-                            <span class="social-icon">🐦</span>
+                        <a href="https://x.com/CanKaygisiz9" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <span class="social-icon" aria-hidden="true">🐦</span>
                             <span>X</span>
                         </a>
-                        <a href="https://www.instagram.com/can_kaygisiz" target="_blank" class="social-link">
-                            <span class="social-icon">📸</span>
+                        <a href="https://www.instagram.com/can_kaygisiz" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <span class="social-icon" aria-hidden="true">📸</span>
                             <span>Instagram</span>
                         </a>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form-section">
+                <h3>Send Me a Message</h3>
+                <form class="contact-form" id="contact-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required aria-required="true">
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject <span class="required">*</span></label>
+                        <input type="text" id="subject" name="subject" required aria-required="true">
+                        <span class="error-message" id="subject-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                        <span class="error-message" id="message-error"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary submit-btn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loader" style="display: none;">Sending...</span>
+                    </button>
+                </form>
             </div>
         </div>
     </section>

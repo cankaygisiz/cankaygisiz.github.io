@@ -3,6 +3,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add JS enabled class for progressive enhancement
     document.body.classList.add('js-enabled');
     
+    // Hide loading screen
+    setTimeout(function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => loadingScreen.remove(), 500);
+        }
+    }, 1000);
+    
     // Initialize navigation
     initializeNavigation();
     
@@ -14,12 +23,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize contact form (if needed)
     initializeContactFeatures();
+    
+    // Initialize scroll to top button
+    initializeScrollToTop();
+    
+    // Initialize CV download
+    initializeCVDownload();
 });
 
 // Navigation functionality
 function initializeNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
+    const navBackdrop = document.getElementById('nav-backdrop');
     const navLinks = document.querySelectorAll('.nav-link');
     const navbar = document.querySelector('.navbar');
 
@@ -29,11 +45,15 @@ function initializeNavigation() {
             e.preventDefault();
             e.stopPropagation();
             
-            navMenu.classList.toggle('active');
+            const isActive = navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
+            if (navBackdrop) navBackdrop.classList.toggle('active');
+            
+            // Update ARIA attributes
+            navToggle.setAttribute('aria-expanded', isActive);
             
             // Prevent body scroll when menu is open
-            if (navMenu.classList.contains('active')) {
+            if (isActive) {
                 document.body.style.overflow = 'hidden';
             } else {
                 document.body.style.overflow = '';
@@ -45,6 +65,8 @@ function initializeNavigation() {
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
+                if (navBackdrop) navBackdrop.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
         });
@@ -54,15 +76,30 @@ function initializeNavigation() {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
+                if (navBackdrop) navBackdrop.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
         });
+
+        // Close menu when clicking backdrop
+        if (navBackdrop) {
+            navBackdrop.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                navBackdrop.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        }
 
         // Close menu on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
+                if (navBackdrop) navBackdrop.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
         });
@@ -126,6 +163,8 @@ function initializeNavigation() {
         if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
+            if (navBackdrop) navBackdrop.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
         }
     });
@@ -260,6 +299,53 @@ function animateProjectCards() {
 
 // Contact features
 function initializeContactFeatures() {
+    // Contact form validation and submission
+    const contactForm = document.getElementById('contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            clearFormErrors();
+            
+            // Validate form
+            if (!validateForm()) {
+                return;
+            }
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                subject: document.getElementById('subject').value.trim(),
+                message: document.getElementById('message').value.trim()
+            };
+            
+            // Show loading state
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            
+            try {
+                // Simulate form submission (replace with actual endpoint)
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Show success message
+                showNotification('Message sent successfully! I\'ll get back to you soon. ✉️', 5000);
+                
+                // Reset form
+                contactForm.reset();
+            } catch (error) {
+                showNotification('Failed to send message. Please try again or email me directly.', 5000);
+            } finally {
+                // Remove loading state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        });
+    }
+    
     // Copy email to clipboard functionality
     const emailElements = document.querySelectorAll('[href="mailto:can_kaygisiz@yahoo.com"], .contact-details p');
     
@@ -298,6 +384,75 @@ function initializeContactFeatures() {
             // Add analytics tracking here if needed
         });
     });
+}
+
+// Form validation functions
+function validateForm() {
+    let isValid = true;
+    
+    // Validate name
+    const name = document.getElementById('name').value.trim();
+    if (!name) {
+        showFieldError('name', 'Name is required');
+        isValid = false;
+    } else if (name.length < 2) {
+        showFieldError('name', 'Name must be at least 2 characters');
+        isValid = false;
+    }
+    
+    // Validate email
+    const email = document.getElementById('email').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+        showFieldError('email', 'Email is required');
+        isValid = false;
+    } else if (!emailRegex.test(email)) {
+        showFieldError('email', 'Please enter a valid email address');
+        isValid = false;
+    }
+    
+    // Validate subject
+    const subject = document.getElementById('subject').value.trim();
+    if (!subject) {
+        showFieldError('subject', 'Subject is required');
+        isValid = false;
+    } else if (subject.length < 3) {
+        showFieldError('subject', 'Subject must be at least 3 characters');
+        isValid = false;
+    }
+    
+    // Validate message
+    const message = document.getElementById('message').value.trim();
+    if (!message) {
+        showFieldError('message', 'Message is required');
+        isValid = false;
+    } else if (message.length < 10) {
+        showFieldError('message', 'Message must be at least 10 characters');
+        isValid = false;
+    }
+    
+    return isValid;
+}
+
+function showFieldError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    const errorElement = document.getElementById(`${fieldId}-error`);
+    const formGroup = field.closest('.form-group');
+    
+    if (errorElement) {
+        errorElement.textContent = message;
+    }
+    if (formGroup) {
+        formGroup.classList.add('error');
+    }
+}
+
+function clearFormErrors() {
+    const errorMessages = document.querySelectorAll('.error-message');
+    errorMessages.forEach(error => error.textContent = '');
+    
+    const errorGroups = document.querySelectorAll('.form-group.error');
+    errorGroups.forEach(group => group.classList.remove('error'));
 }
 
 // Utility function to show notifications
@@ -406,9 +561,11 @@ function initializeThemeToggle() {
     if (on) {
       body.classList.add('dark-mode');
       localStorage.setItem(storageKey, '1');
+      if (toggle) toggle.setAttribute('aria-pressed', 'true');
     } else {
       body.classList.remove('dark-mode');
       localStorage.setItem(storageKey, '0');
+      if (toggle) toggle.setAttribute('aria-pressed', 'false');
     }
   }
 
@@ -468,6 +625,51 @@ document.head.appendChild(style);
 
 // Initialize easter egg
 initializeEasterEgg();
+
+// Scroll to top button functionality
+function initializeScrollToTop() {
+    const scrollButton = document.getElementById('scroll-to-top');
+    
+    if (!scrollButton) return;
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollButton.classList.add('visible');
+        } else {
+            scrollButton.classList.remove('visible');
+        }
+    });
+    
+    // Scroll to top on click
+    scrollButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// CV Download functionality
+function initializeCVDownload() {
+    const downloadBtn = document.getElementById('download-cv');
+    
+    if (!downloadBtn) return;
+    
+    downloadBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Show notification that CV generation is in progress
+        showNotification('Preparing your CV download... 📄', 2000);
+        
+        // Simulate CV download (replace with actual PDF generation/download)
+        setTimeout(() => {
+            showNotification('CV download ready! (Add your CV file to enable actual download)', 4000);
+            // When you have a CV file, uncomment and update the following:
+            // window.location.href = 'path/to/your/cv.pdf';
+        }, 1000);
+    });
+}
 
 // Error handling
 window.addEventListener('error', function(e) {
