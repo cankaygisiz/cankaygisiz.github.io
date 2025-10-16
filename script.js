@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize CV download
     initializeCVDownload();
+    
+    // Initialize parallax effects
+    initializeParallax();
 });
 
 // Navigation functionality
@@ -279,6 +282,15 @@ function animateSkillItems() {
                 setTimeout(() => {
                     item.style.opacity = '1';
                     item.style.transform = 'translateX(0)';
+                    
+                    // Animate progress bars
+                    const progressBar = item.querySelector('.skill-progress');
+                    if (progressBar) {
+                        const progress = progressBar.getAttribute('data-progress');
+                        setTimeout(() => {
+                            progressBar.style.width = progress + '%';
+                        }, 100);
+                    }
                 }, itemIndex * 50);
             });
         }, categoryIndex * 150);
@@ -668,6 +680,34 @@ function initializeCVDownload() {
             // When you have a CV file, uncomment and update the following:
             // window.location.href = 'path/to/your/cv.pdf';
         }, 1000);
+    });
+}
+
+// Parallax scroll effects
+function initializeParallax() {
+    const hero = document.querySelector('.hero');
+    const heroBackground = hero ? hero.querySelector('::before') : null;
+    
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        
+        // Parallax effect for hero background
+        if (hero && scrolled < window.innerHeight) {
+            const heroElement = hero.querySelector('.hero::before') || hero;
+            if (hero.style) {
+                hero.style.setProperty('--scroll', scrolled * 0.5 + 'px');
+            }
+        }
+        
+        // Parallax for tech icons
+        const techIcons = document.querySelectorAll('.tech-icon');
+        techIcons.forEach((icon, index) => {
+            if (scrolled < window.innerHeight) {
+                const speed = 0.3 + (index * 0.1);
+                const yPos = scrolled * speed;
+                icon.style.transform = `translateY(${yPos}px)`;
+            }
+        });
     });
 }
 
