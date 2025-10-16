@@ -175,6 +175,98 @@ body {
     transform: rotate(-45deg) translate(6px, -6px);
 }
 
+/* Dark Mode Toggle Button */
+.dark-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(248, 249, 250, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding: 6px 12px 6px 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.dark-toggle:hover {
+    background: rgba(0, 123, 255, 0.08);
+    border-color: rgba(102, 126, 234, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.toggle-track {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 3px;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-thumb {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    left: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .toggle-thumb {
+    transform: translateX(22px);
+}
+
+body.dark-mode .toggle-track {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+}
+
+.toggle-icon {
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-sun {
+    opacity: 1;
+}
+
+.toggle-moon {
+    opacity: 0.4;
+}
+
+body.dark-mode .toggle-sun {
+    opacity: 0.4;
+}
+
+body.dark-mode .toggle-moon {
+    opacity: 1;
+}
+
+body.dark-mode .dark-toggle {
+    background: rgba(24, 28, 36, 0.98);
+    border-color: rgba(144, 202, 249, 0.2);
+}
+
+body.dark-mode .dark-toggle:hover {
+    background: rgba(35, 40, 58, 0.98);
+    border-color: rgba(144, 202, 249, 0.4);
+    box-shadow: 0 4px 12px rgba(144, 202, 249, 0.15);
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -844,6 +936,30 @@ body.dark-mode .highlight-text {
         display: flex;
     }
 
+    .dark-toggle {
+        margin-right: 10px;
+        padding: 4px 8px 4px 4px;
+        gap: 6px;
+    }
+
+    .toggle-track {
+        width: 42px;
+        height: 22px;
+    }
+
+    .toggle-thumb {
+        width: 16px;
+        height: 16px;
+    }
+
+    body.dark-mode .toggle-thumb {
+        transform: translateX(20px);
+    }
+
+    .toggle-icon {
+        font-size: 1rem;
+    }
+
     .logo-text {
         font-size: 1.1rem;
     }
@@ -938,6 +1054,30 @@ body.dark-mode .highlight-text {
 
     .btn {
         padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+
+    .dark-toggle {
+        margin-right: 8px;
+        padding: 3px 6px 3px 3px;
+        gap: 4px;
+    }
+
+    .toggle-track {
+        width: 38px;
+        height: 20px;
+    }
+
+    .toggle-thumb {
+        width: 14px;
+        height: 14px;
+    }
+
+    body.dark-mode .toggle-thumb {
+        transform: translateX(18px);
+    }
+
+    .toggle-icon {
         font-size: 0.9rem;
     }
 
